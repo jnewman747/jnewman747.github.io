@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset=utf-8 />
+  <title>Lesson 08: US Power Plants</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css" />
+  <!-- Is the is the latest version of Leaflet? -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: rgb(42, 42, 42);
+      font-family: "Roboto Condensed", sans-serif;
+      font-size: 100%;
+      font-weight: 300;
+      color: rgb(172, 172, 172);
+    }
+
+    header,
+    footer,
+    section {
+      padding: 6px 10%;
+      margin: 0 auto;
+      width: 80%
+    }
+
+    h1 {
+      display: inline-block;
+      margin-right: 20px;
+      color: rgb(190, 190, 190);
+      font-size: 3.5em;
+      font-weight: 700;
+    }
+
+    h2 {
+      display: inline-block;
+      color: #94d8ff;
+      letter-spacing: 0.05em;
+      margin-top: 0px;
+      font-weight: 300;
+      text-transform: uppercase;
+      /*  Stack text shadows.  */
+      text-shadow: 0 0 30px #0098b3, 0 0 40px #00c2e4, 0 0 50px #00c2e4, 0 0 80px #00c2e4;
+    }
+
+
+    #map {
+      width: 80%;
+      height: 540px;
+      margin: 10px auto;
+    }
+
+
+    p {
+      padding: 6px 10%;
+      margin: 0 auto;
+      width: 80%;
+      font-size: 1em;
+      color: rgba(170, 170, 170);
+      ;
+      font-weight: 300;
+      font-size: 1.2em;
+    }
+
+
+
+ul {  padding: 6px 10%;
+      margin: 0 auto;
+      width: 80%}
+
+
+    .leaflet-control-layers{
+        font-family: "Lato", sans-serif;
+        width: 100px;
+        background: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        font-size: 1em;
+        font-weight: 700;
+        line-height: 1.4em;
+    }
+
+    .leaflet-popup, .leaflet-tooltip {
+        font-family: "Lato", sans-serif;
+        font-size: 1em;
+        line-height: 1.4em;
+    }
+
+
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>US Power Plants</h1>
+    <br />
+    <h2>sources of electricity</h2>
+  </header>
+
+  <div id='map'></div>
+
+  <p>The above map displays power plants for three distinct energy sources in the United States: hydro,
+    wind, and solar. Use the map legend to toggle on and off between these three layers. </p>
+    <p>Map authored by Jill Newman</p>
+    <br>
+  <p><b>Social links</b></p>
+  <ul>
+    <li>See my projects on GitHub: <a href="https://github.com/newmapsplus/map672-mod-01-jnewman747">mapping
+        portfolio</a></li>
+    <li>Follow me on Twitter: <a href="https://twitter.com/PriceHerpLab">@PriceHerpLab</a></li>
+    <li>Follow me on Facebook: <a href="https://www.facebook.com/PriceHerpLab/">Price Herp Lab at UK</a>
+    </li>
+  </ul>
+
+  <footer>
+    
+    <p></p>
+  </footer>
+  <!-- Is the is the latest version of Leaflet? -->
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+  <script src="data/power-plants.js"></script>
+  <script>
+    var map = L.map('map', {
+      center: [36, -94],
+      zoom: 4,
+    });
+
+    var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+      subdomains: 'abcd',
+      maxZoom: 19
+    });
+
+    tiles.addTo(map);
+
+    //*****************************************************************
+
+    //     L.geoJson(plants, {
+    //     pointToLayer: function (feature, latlng) {
+    //         return L.circleMarker(latlng, {
+    //             color: '#1f78b4',
+    //             fillColor: '#1f78b4',
+    //             weight: 1,
+    //             stroke: 1,
+    //             fillOpacity: .8,
+    //             radius: getRadius(feature.properties.fuel_source.Hydro)
+    //         });
+    //     },
+    //     filter: function (feature) {
+    //         if (feature.properties.fuel_source.Hydro) {
+    //             return feature;
+    //         }
+    //     }
+    // }).addTo(map);
+
+
+    //*****************************************************************
+
+
+    //Add getRadius function
+    // L.geoJson(plants, {
+    //     pointToLayer: function (feature, latlng) {
+    //         return L.circleMarker(latlng);
+    //     },
+    //     filter: function (feature) {
+    //         if (feature.properties.fuel_source.Hydro) {
+    //             return feature;
+    //         }
+    //     },
+    //     style: function (feature) {
+    //         return {
+    //             color: '#1f78b4',
+    //             fillColor: '#1f78b4',
+    //             weight: 1,
+    //             stroke: 1,
+    //             fillOpacity: .8,
+    //             radius: getRadius(feature.properties.fuel_source.Hydro)
+    //         }
+    //     }
+    // }).addTo(map);
+
+
+    // //Define outside the geoJson
+    // function getRadius(val) {
+    //  var radius = Math.sqrt(val/Math.PI);
+    //  return radius * .8;
+    // }
+
+
+    // //Style option
+    // //Does same as above
+    // L.geoJson(plants, {
+    //     pointToLayer: function (feature, latlng) {
+    //         return L.circleMarker(latlng);
+    //     },
+    //     filter: function (feature) {
+    //         if (feature.properties.fuel_source.Hydro) {
+    //             return feature;
+    //         }
+    //     },
+    //     style: function (feature) {
+    //         return {
+    //             color: '#1f78b4',
+    //             fillColor: '#1f78b4',
+    //             weight: 1,
+    //             stroke: 1,
+    //             fillOpacity: .8,
+    //             radius: getRadius(feature.properties.fuel_source.Hydro)
+    //         }
+    //     }
+    // }).addTo(map);
+
+
+
+
+    //*****************************************************************
+
+    // //Common styles variable
+    // var commonStyles = {
+    //     weight: 1,
+    //     stroke: 1,
+    //     fillOpacity: .8
+    // }
+
+    // //Create a variable to reference Leaflet geoJSON layer
+    // var hydroLayer = L.geoJson(plants, {
+    //     pointToLayer: function (feature, latlng) {
+    //         return L.circleMarker(latlng, commonStyles);
+    //     },
+    //     filter: function (feature) {
+    //         if (feature.properties.fuel_source.Hydro) {
+    //             return feature;
+    //         }
+    //     },
+    //     style: function (feature) {
+    //         return {
+    //             color: '#1f78b4',
+    //             fillColor: '#1f78b4',
+    //             radius: getRadius(feature.properties.fuel_source.Hydro)
+    //         }
+    //     }
+    // }).addTo(map);
+
+    // // Change all layers in FeatureGroup with path options object
+    // hydroLayer.setStyle({
+    //     color: '#a5c9e2',
+    //     fillColor: '#a5c9e2'
+    // });
+
+    //  //Define outside the geoJson
+    //  function getRadius(val) {
+    //   var radius = Math.sqrt(val/Math.PI);
+    //   return radius * .8;
+    //  }
+
+
+    //*****************************************************************
+
+
+
+
+    // //Common styles variable
+    // var commonStyles = {
+    //   weight: 1,
+    //   stroke: 1,
+    //   fillOpacity: .8
+    // }
+
+    // //Create a variable to reference Leaflet geoJSON layer
+    // var hydroLayer = L.geoJson(plants, {
+    //   pointToLayer: function (feature, latlng) {
+    //     return L.circleMarker(latlng, commonStyles);
+    //   },
+    //   filter: function (feature) {
+    //     if (feature.properties.fuel_source.Hydro) {
+    //       return feature;
+    //     }
+    //   },
+    //   style: function (feature) {
+    //     return {
+    //       color: '#1f78b4',
+    //       fillColor: '#1f78b4',
+    //       radius: getRadius(feature.properties.fuel_source.Hydro)
+    //     }
+    //   }
+    // }).addTo(map);
+
+    // // Add if/else statement
+    // hydroLayer.setStyle(function (feature) {
+    //   if (feature.properties.fuel_source.Hydro > 100) {
+    //     return {
+    //       color: '#0062c5', // darker blue
+    //       fillColor: '#a5c9e2'}
+
+    // }
+    //     else {
+    //       return {
+    //         color: '#a5c9e2',
+    //         fillColor: '#a5c9e2'
+    //       }
+    //     }
+    //   });
+
+    // //Define outside the geoJson
+    // function getRadius(val) {
+    //   var radius = Math.sqrt(val / Math.PI);
+    //   return radius * .8;
+    // }
+
+
+    //*****************************************************************
+
+
+
+    //     var hydroLayer = L.geoJson(plants, {
+    //     pointToLayer: function (feature, latlng) {
+    //         return L.circleMarker(latlng);
+    //     },
+    //     filter: function (feature) {
+    //         if (feature.properties.fuel_source.Hydro) {
+    //             return feature;
+    //         }
+    //     },
+    //     style: function (feature) {
+    //         return {
+    //             color: '#1f78b4',
+    //             fillColor: '#1f78b4',
+    //             weight: 1,
+    //             stroke: 1,
+    //             fillOpacity: .8,
+    //             radius: getRadius(feature.properties.fuel_source.Hydro)
+    //         }
+    //     }
+    // }).addTo(map);
+
+    // hydroLayer.eachLayer(function (layer) {
+    //     // code goes here
+    //     console.log(layer);
+    // });
+
+
+    //  //Define outside the geoJson
+    //      function getRadius(val) {
+    //        var radius = Math.sqrt(val / Math.PI);
+    //        return radius * .8;
+    //      }
+
+
+
+    //*****************************************************************
+
+    // //User Activity
+    // var hydroLayer = L.geoJson(plants, {
+    //     pointToLayer: function (feature, latlng) {
+    //         return L.circleMarker(latlng);
+    //     },
+    //     filter: function (feature) {
+    //         if (feature.properties.fuel_source.Hydro) {
+    //             return feature;
+    //         }
+    //     },
+    //     style: function (feature) {
+    //         return {
+    //             color: '#1f78b4',
+    //             fillColor: '#1f78b4',
+    //             weight: 1,
+    //             stroke: 1,
+    //             fillOpacity: .8,
+    //             radius: getRadius(feature.properties.fuel_source.Hydro)
+    //         }
+    //     }
+    // }).addTo(map);
+
+    // map.on('click', function (e) {
+    //     console.log(e.latlng) // access to the click coordinates
+    //     hydroLayer.eachLayer(function (layer) {
+    //         console.log(layer.getLatLng()); // access to the layer coordinates
+    //     });
+    // });
+
+
+    //  //Define outside the geoJson
+    //  function getRadius(val) {
+    //        var radius = Math.sqrt(val / Math.PI);
+    //        return radius * .8;
+    //      }
+
+
+    //*****************************************************************
+
+
+    // //User Activity
+    // var hydroLayer = L.geoJson(plants, {
+    //     pointToLayer: function (feature, latlng) {
+    //         return L.circleMarker(latlng);
+    //     },
+    //     filter: function (feature) {
+    //         if (feature.properties.fuel_source.Hydro) {
+    //             return feature;
+    //         }
+    //     },
+    //     style: function (feature) {
+    //         return {
+    //             color: '#1f78b4',
+    //             fillColor: '#1f78b4',
+    //             weight: 1,
+    //             stroke: 1,
+    //             fillOpacity: .8,
+    //             radius: getRadius(feature.properties.fuel_source.Hydro)
+    //         }
+    //     }
+    // }).addTo(map);
+
+    // //method to calculate distance between click point and each GeoJson feature
+    // map.on('click', function (e) {
+    //   hydroLayer.eachLayer(function(layer) {
+    //  var distance = e.latlng.distanceTo(layer.getLatLng());
+    //  console.log(distance); // distance in meters between click point
+    //  // and each layer's centroid
+    //     });
+    // });
+
+
+    //  //Define outside the geoJson
+    //  function getRadius(val) {
+    //        var radius = Math.sqrt(val / Math.PI);
+    //        return radius * .8;
+    //      }
+
+
+
+
+
+
+    //*****************************************************************
+
+
+    // //User Activity
+    // var hydroLayer = L.geoJson(plants, {
+    //     pointToLayer: function (feature, latlng) {
+    //         return L.circleMarker(latlng);
+    //     },
+    //     filter: function (feature) {
+    //         if (feature.properties.fuel_source.Hydro) {
+    //             return feature;
+    //         }
+    //     },
+    //     style: function (feature) {
+    //         return {
+    //             color: '#1f78b4',
+    //             fillColor: '#1f78b4',
+    //             weight: 1,
+    //             stroke: 1,
+    //             fillOpacity: .8,
+    //             radius: getRadius(feature.properties.fuel_source.Hydro)
+    //         }
+    //     }
+    // }).addTo(map);
+
+    // //If/else statement
+    // //features within 500km are shown
+    // //features outside 500km are invisible (not rendered on map)
+    // map.on('click', function (e) {
+    //   hydroLayer.eachLayer(function (layer) {
+    //         var distance = e.latlng.distanceTo(layer.getLatLng()) / 1000; // distance as km
+
+    //         if (distance > 500) {
+    //             layer.setStyle({
+    //                 stroke: false,
+    //                 fill: false
+    //             });
+    //         } else {
+    //             layer.setStyle({
+    //                 stroke: true,
+    //                 fill: true
+    //             });
+    //         }
+    //     });
+    // });
+
+
+    //  //Define outside the geoJson
+    //  function getRadius(val) {
+    //        var radius = Math.sqrt(val / Math.PI);
+    //        return radius * .8;
+    //      }
+
+
+
+
+    //*****************************************************************
+
+
+    // //User Activity
+    // var hydroLayer = L.geoJson(plants, {
+    //     pointToLayer: function (feature, latlng) {
+    //         return L.circleMarker(latlng);
+    //     },
+    //     filter: function (feature) {
+    //         if (feature.properties.fuel_source.Hydro) {
+    //             return feature;
+    //         }
+    //     },
+    //     style: function (feature) {
+    //         return {
+    //             color: '#1f78b4',
+    //             fillColor: '#1f78b4',
+    //             weight: 1,
+    //             stroke: 1,
+    //             fillOpacity: .8,
+    //             radius: getRadius(feature.properties.fuel_source.Hydro)
+    //         }
+    //     }
+    // }).addTo(map);
+
+    // //If/else statement
+    // //features within 500km are shown
+    // //features outside 500km are invisible (not rendered on map)
+    // //add a popup that says I am XXXX from the click point
+    // map.on('click', function (e) {
+    //   hydroLayer.eachLayer(function (layer) {
+    //         var distance = e.latlng.distanceTo(layer.getLatLng()) / 1000; // distance as km
+
+    //         if (distance > 500) {
+    //             layer.setStyle({
+    //                 stroke: false,
+    //                 fill: false
+    //             });
+    //         } else {
+    //             layer.setStyle({
+    //                 stroke: true,
+    //                 fill: true
+    //             });
+    //             layer.bindPopup(`I am <b>${distance.toLocaleString()}km</b><br> from the click point.`);
+    //         } // end else
+    //     });
+    // });
+
+
+    //  //Define outside the geoJson
+    //  function getRadius(val) {
+    //        var radius = Math.sqrt(val / Math.PI);
+    //        return radius * .8;
+    //      }
+
+
+
+
+
+    //*****************************************************************
+
+    //Bivariate Map with three fuel sources: Hydro, Wind, and Solar
+
+
+    //***********
+    //HYDRO LAYER
+    //***********
+    var hydroLayer = L.geoJson(plants, {
+      pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng);
+      },
+      filter: function (feature) {
+        if (feature.properties.fuel_source.Hydro) {
+          return feature;
+        }
+      },
+      style: function (feature) {
+        return {
+          color: '#1f78b4',
+          fillColor: '#1f78b4',
+          weight: 1,
+          stroke: 1,
+          fillOpacity: .8,
+          radius: getRadius(feature.properties.fuel_source.Hydro)
+        }
+      }
+    }).addTo(map);
+
+    //Define outside the geoJson
+    function getRadius(val) {
+      var radius = Math.sqrt(val / Math.PI);
+      return radius * .8;
+    }
+
+
+    //***********
+    //WIND LAYER
+    //***********
+    var windLayer = L.geoJson(plants, {
+      pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng);
+      },
+      filter: function (feature) {
+        if (feature.properties.fuel_source.Wind) {
+          return feature;
+        }
+      },
+      style: function (feature) {
+        return {
+          color: '#a6cee3',
+          fillColor: '#a6cee3',
+          weight: 1,
+          stroke: 1,
+          fillOpacity: .8,
+          radius: getRadius(feature.properties.fuel_source.Wind)
+        }
+      }
+    }).addTo(map);
+
+    //Define outside the geoJson
+    function getRadius(val) {
+      var radius = Math.sqrt(val / Math.PI);
+      return radius * .8;
+    }
+
+
+
+    //***********      
+    //SOLAR LAYER
+    //***********
+    var solarLayer = L.geoJson(plants, {
+      pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng);
+      },
+      filter: function (feature) {
+        if (feature.properties.fuel_source.Solar) {
+          return feature;
+        }
+      },
+      style: function (feature) {
+        return {
+          color: '#ffff99',
+          fillColor: '#ffff99',
+          weight: 1,
+          stroke: 1,
+          fillOpacity: .8,
+          radius: getRadius(feature.properties.fuel_source.Solar)
+        }
+      }
+    }).addTo(map);
+
+    //Define outside the geoJson
+    function getRadius(val) {
+      var radius = Math.sqrt(val / Math.PI);
+      return radius * .8;
+    }
+
+
+
+
+    var sourcesLayers = {
+      "Hydro": hydroLayer,
+      "Wind": windLayer,
+      "Solar": solarLayer
+    }
+
+    //Adding a Leaflet Layer Control Object
+    //Toggle on and off various layers we've created
+    //var sourcesLayers = {
+      //"Hydro": hydroLayer, // hydroLayer references a Leaflet L.GeoJSON layer
+      //"Wind": windLayer,
+      //"Solar": solarLayer
+    //}
+
+//Legend with CSS code
+    //Color matches color within map
+    var sourcesLayers = {
+      "<b style='color:#1f78b4'>Hydro</b>": hydroLayer,
+      "<b style='color:#a6cee3'>Wind</b>": windLayer,
+      "<b style='color:#ffff99; text-shadow: 0px 0px 1px #333;'>Solar</b>": solarLayer
+    }
+
+
+
+    L.control.layers(null, sourcesLayers, {
+      collapsed: false
+    }).addTo(map);
+
+
+    placeLayers = [hydroLayer, windLayer, solarLayer];
+
+    map.on('click', function (e) {
+      placeLayers.forEach(function (layer) {
+        layer.eachLayer(function (layer) {
+          var distance = e.latlng.distanceTo(layer.getLatLng()) / 1000; // distance as km
+
+          if (distance > 500) {
+            layer.setStyle({
+              stroke: false,
+              fill: false
+            });
+          } else {
+            layer.setStyle({
+              stroke: true,
+              fill: true
+            });
+            const props = layer.feature.properties;
+            layer.bindPopup(`${props.plant_name}: <b>${distance.toLocaleString()}km</b><br> from the click point.`);
+          } // end else
+        });
+      });
+    });
+
+
+    //*****************************************************************
+
+//Advanced Topic
+//Refactoring your code
+
+
+
+  </script>
+
+</body>
+
+</html>
