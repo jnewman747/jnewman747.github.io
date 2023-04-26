@@ -38,3 +38,8 @@ h2{
 
 p{font-weight: 500;
 }
+
+.card .card-img-top {
+  object-fit: cover;
+  height: calc(100px + 10vw);
+}
