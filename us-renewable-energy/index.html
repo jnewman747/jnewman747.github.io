@@ -69,28 +69,29 @@
 
 
 
-ul {  padding: 6px 10%;
+    ul {
+      padding: 6px 10%;
       margin: 0 auto;
-      width: 80%}
-
-
-    .leaflet-control-layers{
-        font-family: "Lato", sans-serif;
-        width: 100px;
-        background: rgba(0, 0, 0, 0.5);
-        color: #fff;
-        font-size: 1em;
-        font-weight: 700;
-        line-height: 1.4em;
-    }
-
-    .leaflet-popup, .leaflet-tooltip {
-        font-family: "Lato", sans-serif;
-        font-size: 1em;
-        line-height: 1.4em;
+      width: 80%
     }
 
 
+    .leaflet-control-layers {
+      font-family: "Lato", sans-serif;
+      width: 100px;
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      font-size: 1em;
+      font-weight: 700;
+      line-height: 1.4em;
+    }
+
+    .leaflet-popup,
+    .leaflet-tooltip {
+      font-family: "Lato", sans-serif;
+      font-size: 1em;
+      line-height: 1.4em;
+    }
   </style>
 </head>
 
@@ -103,10 +104,14 @@ ul {  padding: 6px 10%;
 
   <div id='map'></div>
 
-  <p>Sources of electricity can be split into three categories: fossil fuels, nuclear, and renewable energy. The above interactive map highlights power plants for three types of renewable energy sources in the United States: hydro,
-    wind, and solar. Double click on the map to learn more about the power plants. Use the map legend to toggle on and off between these three layers. </p>
-    <p>Map authored by Jill Newman</p>
-    <br>
+  <p>Sources of electricity can be split into three categories: fossil fuels, nuclear, and renewable energy. The above
+    interactive map highlights power plants for three types of renewable energy sources in the United States: hydro,
+    wind, and solar. Double click on the map to learn more about the power plants. Use the map legend to toggle on and
+    off between these three layers. Data from this map was collected <a
+      href="http://www.eia.gov/electricity/data/eia923/">here
+    </a>.</p>
+  <p>Map authored by Jill Newman</p>
+  <br>
   <p><b>Social links</b></p>
   <ul>
     <li>See my projects on GitHub: <a href="https://github.com/newmapsplus/map672-mod-01-jnewman747">mapping
@@ -117,7 +122,7 @@ ul {  padding: 6px 10%;
   </ul>
 
   <footer>
-    
+
     <p></p>
   </footer>
   <!-- Is the is the latest version of Leaflet? -->
@@ -137,7 +142,7 @@ ul {  padding: 6px 10%;
 
     tiles.addTo(map);
 
-    
+
 
 
 
@@ -250,9 +255,9 @@ ul {  padding: 6px 10%;
       "Solar": solarLayer
     }
 
-  
 
-//Legend with CSS code
+
+    //Legend with CSS code
     //Color matches color within map
     var sourcesLayers = {
       "<b style='color:#1f78b4'>Hydro</b>": hydroLayer,
@@ -285,17 +290,15 @@ ul {  padding: 6px 10%;
               fill: true
             });
             const props = layer.feature.properties;
-            layer.bindPopup(`${props.plant_name} <br>Capacity: ${props.capacity_mw}mw <br><b>${distance.toLocaleString()}km</b> from the click point.`);
+            layer.bindPopup(
+              `${props.plant_name} <br>Capacity: ${props.capacity_mw}mw <br><b>${distance.toLocaleString()}km</b> from the click point.`
+              );
             //layer.bindPopup(`${props.plant_name}: <b>${distance.toLocaleString()}km</b><br> from the click point.`);
 
           } // end else
         });
       });
     });
-
-
-
-
   </script>
 
 </body>
