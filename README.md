@@ -1,8 +1,8 @@
 # jnewman747.github.io
 
-# Final project topics and objectives
+# Projects
 
-## Data Source
+## Data Sources
 
 For my final project, I'm using data from a recent manuscript entitled, "Media portrayal of the illegal trade in wildlife: The case of turtles in the US and implications for conservation" co-authored by Tara Easter et al. in 2023. I will be using data from a supplementary table: Table S3.
 https://besjournals.onlinelibrary.wiley.com/doi/epdf/10.1002/pan3.10448
