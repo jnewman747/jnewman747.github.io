@@ -285,7 +285,9 @@ ul {  padding: 6px 10%;
               fill: true
             });
             const props = layer.feature.properties;
-            layer.bindPopup(`${props.plant_name}: <b>${distance.toLocaleString()}km</b><br> from the click point.`);
+            layer.bindPopup(`${props.plant_name} <br>Capacity: ${props.capacity_mw}mw <br><b>${distance.toLocaleString()}km</b> from the click point.`);
+            //layer.bindPopup(`${props.plant_name}: <b>${distance.toLocaleString()}km</b><br> from the click point.`);
+
           } // end else
         });
       });
