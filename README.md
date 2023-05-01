@@ -9,11 +9,20 @@ Many of these projects being presented are from the New Maps Program through the
 
 ## Final Project
 
-## Wildlifres in Alaska
+## Wildlfires in Alaska
 
 ## Natural Landforms in Alaska
 
+This map examined topography and natural landforms in Alaska. We used GDAL and QGIS to convert raster elevation units (https://www.usgs.gov/3d-elevation-program) to create contours. Then we used Mapbox to create a map using an arch (https://www.usgs.gov/us-board-on-geographic-names/download-gnis-data) in our selected state (mine being Alaska).
+
+This map was created using GDAL, QGIS, and Mapbox.
+
+
 ## Predicted Habitat
+
+This is a static map from my M.S. work at Clemson University involving effects of climate chnage on green salamanders. We collected salamanders in the field and brought them back to Clemson for a laboratory experiment. All work was done conducted under proper permitting. We determined water loss rates using a flow through machine and we used the results to create a hybrid model (correlative + mechanistic model) to predict potential refugia under different climatic scenarios and retraints. More information about this project and map can be found here: https://www.researchgate.net/publication/361109903_Integrating_physiology_into_correlative_models_can_alter_projections_of_habitat_suitability_under_climate_change_for_a_threatened_amphibian
+
+This map was created using ArcGIS and MaxEnt.
 
 
 ## United States Energy Sources
