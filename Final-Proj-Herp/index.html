@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset=utf-8 />
+  <title>Herpetology Lab</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css" />
+  <!-- Is the is the latest version of Leaflet? -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto+Serif:wght@200;300;400&family=Roboto:wght@300&display=swap"
+    rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400&family=Roboto+Serif:wght@200;300;400&family=Roboto:wght@300&display=swap"
+    rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #10295b;
+      font-family: "Roboto", sans-serif;
+      font-size: 100%;
+      font-weight: 300;
+      color: rgb(172, 172, 172);
+    }
+
+    header,
+    footer,
+    section {
+      padding: 6px 10%;
+      margin: 0 auto;
+      width: 80%
+    }
+
+    h1 {
+      display: inline-block;
+      margin-right: 20px;
+      color: rgb(190, 190, 190);
+      font-size: 3.5em;
+      font-weight: 700;
+    }
+
+    h2 {
+      display: inline-block;
+      color: #009bda;
+      letter-spacing: 0.05em;
+      margin-top: 0px;
+      font-weight: 300;
+      text-transform: uppercase;
+      /*  Stack text shadows.  */
+      text-shadow: 0 0 30px #c7c9c8, 0 0 40px #d3dfd9, 0 0 50px #a9abaa, 0 0 80px #e4f2eb;
+    }
+
+    h3 {
+      padding: 4px 10%;
+      margin: 0 auto;
+      width: 60%;
+      font-size: 1em;
+      color: rgba(170, 170, 170);
+      font-weight: 300;
+      font-size: 0.9em;
+    }
+
+
+    #map {
+      width: 100%;
+      height: 540px;
+      margin: 10px auto;
+    }
+
+
+    p {
+      padding: 6px 0;
+      margin: 0 auto;
+      font-size: 1em;
+      color: rgba(170, 170, 170);
+      font-weight: 300;
+      font-size: 1.2em;
+    }
+
+
+
+    ul {
+      padding: 6px 10%;
+      margin: 0 auto;
+      width: 80%;
+      font-family: "Nunito", Roboto;
+      font-weight: 300;
+    }
+
+
+    .picture {
+      width: 100%;
+      /* height: 340px; */
+      padding: 6px 0;
+    }
+
+
+
+    a:link {
+      color: rgb(22, 164, 207);
+      background-color: transparent;
+      text-decoration: none;
+    }
+
+    a:visited {
+      color: rgb(22, 164, 207);
+      background-color: transparent;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: rgb(239, 236, 236);
+      background-color: transparent;
+      text-decoration: underline;
+    }
+
+    a:active {
+      color: rgb(22, 164, 207);
+      background-color: transparent;
+      text-decoration: underline;
+    }
+
+
+
+
+    /* Use float property to make two-column layout */
+
+    .first-column {
+      float: left;
+      width: 49%;
+      padding-right: 2%;
+    }
+
+    .column {
+      float: left;
+      width: 49%;
+    }
+
+    /* Clear floats after the columns */
+
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+    @media (max-width: 852px) {
+
+      .column,
+      .first-column {
+        width: 100%;
+        padding: 0;
+      }
+    }
+
+    .leaflet-control-layers-list {
+      width: 140px;
+      font-family: "Roboto", sans-serif;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Herpetology Lab at the University of Kentucky</h1>
+    <br />
+    <h2>Price's Projects (2013-Present)</h2>
+  </header>
+  <section>
+    <div class="row">
+      <div id='map'></div>
+
+      <div class="first-column">
+        <p>Dr. Steve Price is a professor within the Forestry and Natural Resources Department at the University of
+          Kentucky. He earned his B.S. (2000) and M.S. (2003) from
+          the University of Wisconsin-Green Bay and his PhD from Wake Forest (2011). He was employed at Davidson College
+          as a Research Coordinator, faculty, and post-doc from 2004-2012. His research focuses on ecology and
+          conservation
+          of aquatic and semi-aquatic organisms (particularly reptiles and amphibians) in Kentucky and its surrounding
+          states.</p>
+
+        <p>The above interactive map displays information regarding different projects in the Price Lab. Click on the
+          projects to find out more about them!
+        </p>
+
+        <p>Information from this map was collected from the <a
+            href="https://pricelab.ca.uky.edu/research-topics-and-current-projects">Price Lab</a></li>.
+          Additional information about individual projects can be found <a
+            href="https://pricelab.ca.uky.edu/publications">here.</a></li> State and county layer data were accessed from the <a
+            href="https://www.census.gov/data.html">Census Bureau.</a></li>
+            
+        </p>
+        <p>Map authored by Jill Newman</p>
+
+
+        <br>
+
+        <p><b>Social links</b></p>
+        <ul>
+          <li>See my projects on GitHub: <a href="https://github.com/newmapsplus/map672-mod-01-jnewman747">mapping
+              portfolio</a></li>
+          <li>Follow me on Twitter: <a href="https://twitter.com/PriceHerpLab">@PriceHerpLab</a></li>
+          <li>Follow me on Facebook: <a href="https://www.facebook.com/PriceHerpLab/">Price Herp Lab at UK</a>
+          </li>
+        </ul>
+
+      </div>
+      <div class="column">
+        <img src="images/Steve.jpg" class='picture' alt="Dr. Price in the field">
+        <div class="linkbox">
+          <h3>Dr. Price looking for amphibians in West Virginia (2022)</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+
+    <p></p>
+  </footer>
+  <!-- Is the is the latest version of Leaflet? -->
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+  <script src="data/projects.js"></script>
+  <script>
+    var map = L.map('map', {
+      center: [38, -84],
+      zoom: 7,
+    });
+
+    var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+      subdomains: 'abcd',
+      maxZoom: 19
+    });
+
+    tiles.addTo(map);
+
+
+    //*****************************************************************
+
+
+
+
+    //***********
+    //Amphibians Layer; GeoJSON
+    //***********
+    var amphibianslayer = L.geoJson(projects, {
+      onEachFeature: function (feature, layer) {
+        let popup =
+          `${layer.feature.properties.title}<br>${layer.feature.properties.years}<br><br>Description: ${layer.feature.properties.description}`;
+        layer.bindPopup(
+          popup); //This code block adds a popup with project title and blurb
+      },
+      pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng);
+      },
+      filter: function (feature) {
+        if (feature.properties.taxa.amphibian) {
+          return feature;
+        }
+      },
+      style: function (feature) {
+        return {
+          color: '#FFFFFF',
+          fillColor: '#0000FF',
+          weight: 2,
+          stroke: 1,
+          fillOpacity: .8,
+
+        }
+      }
+    }).addTo(map);
+
+    //Define outside the geoJson
+    function getRadius(val) {
+      var radius = Math.sqrt(val / Math.PI);
+      return radius * .8;
+    }
+
+
+
+    //***********
+    //Reptiles Layer; GeoJSON
+    //***********
+    var reptileslayer = L.geoJson(projects, {
+      onEachFeature: function (feature, layer) {
+        let popup =
+          `${layer.feature.properties.title}<br>${layer.feature.properties.years}<br><br>Description: ${layer.feature.properties.description}`;
+        layer.bindPopup(
+          popup); //This code block adds a popup with project title and blurb
+      },
+      pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng);
+      },
+      filter: function (feature) {
+        if (feature.properties.taxa.reptiles) {
+          return feature;
+        }
+      },
+      style: function (feature) {
+        return {
+          color: '#FFFFFF',
+          fillColor: '#000000',
+          weight: 2,
+          stroke: 1,
+          fillOpacity: .8,
+
+        }
+      }
+    }).addTo(map);
+
+    //Define outside the geoJson
+    function getRadius(val) {
+      var radius = Math.sqrt(val / Math.PI);
+      return radius * .8;
+    }
+
+
+    //***********
+    //Mussels Layer; GeoJSON
+    //***********
+    var musselslayer = L.geoJson(projects, {
+      onEachFeature: function (feature, layer) {
+        let popup =
+          `${layer.feature.properties.title}<br>${layer.feature.properties.years}<br><br>Description: ${layer.feature.properties.description}`;
+        layer.bindPopup(
+          popup); //This code block adds a popup with project title and blurb
+      },
+      pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng);
+      },
+      filter: function (feature) {
+        if (feature.properties.taxa.mussels) {
+          return feature;
+        }
+      },
+      style: function (feature) {
+        return {
+          color: '#FFFFFF',
+          fillColor: '#CC5500',
+          weight: 2,
+          stroke: 1,
+          fillOpacity: .8,
+
+        }
+      }
+    }).addTo(map);
+
+    //Define outside the geoJson
+    function getRadius(val) {
+      var radius = Math.sqrt(val / Math.PI);
+      return radius * .8;
+    }
+
+
+
+
+
+    //***********************************************************************
+
+
+
+    //Add county layer
+    fetch("data/us-counties.json")
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (counties) {
+        const dataLayer = L.geoJson(counties, {
+          style: function (feature) {
+            return {
+              color: "#dddddd",
+              weight: 0.1,
+              fillOpacity: 0,
+              fillColor: "#1f78b4",
+              interactive: false,
+            };
+          },
+        }).addTo(map);
+        // call to new function here gets the data out of the
+        // callback function
+        drawMap(dataLayer);
+      });
+
+
+    function drawMap(dataLayer) {
+      //   // we now have access to dataLayer here!
+    }
+
+
+
+
+
+
+
+    //Add states layer
+    fetch("data/us_states_500k.geojson")
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (state) {
+        const dataLayer2 = L.geoJson(state, {
+          style: function (feature) {
+            return {
+              color: "#dddddd",
+              weight: 0.5,
+              fillOpacity: 0,
+              fillColor: "#1f78b4",
+              interactive: false,
+            };
+          },
+        }).addTo(map);
+        // call to new function here gets the data out of the
+        // callback function
+        drawMap(dataLayer2);
+
+
+      });
+
+    function drawMap(dataLayer2) {
+      //    // we now have access to dataLayer here!
+    }
+
+
+
+    //***********************************************************************
+    //USER INTERACTION SECTION
+    //***********************************************************************
+
+
+
+    //*******************************************************************
+    //Making the Interactive Legend
+    var sourcesLayers = {
+      "Amphibians": amphibianslayer,
+      "Reptiles": reptileslayer,
+      "Mussels": musselslayer
+    }
+
+    //Legend with CSS code
+    //Color matches color within map
+    var sourcesLayers = {
+      "<b style='color:#0000FF'>Amphibians</b>": amphibianslayer,
+      "<b style='color:#000000'>Reptiles</b>": reptileslayer,
+      "<b style='color:#CC5500'>Mussels</b>": musselslayer
+    }
+
+
+    L.control.layers(null, sourcesLayers, {
+      collapsed: false
+    }).addTo(map);
+
+
+
+
+
+    //*****************************************************************
+
+    //Visual affordance with mouseover/mouseout
+    //Turns gray on mouseover
+    amphibianslayer.on('mouseover', function () {
+      console.log(this)
+      this.setStyle({
+        color: "white",
+        fillColor: "gray"
+      })
+    })
+    //Re-sets style to blue
+    amphibianslayer.on('mouseout', function () {
+      console.log(this)
+      this.resetStyle()
+    })
+
+
+    //Turns gray on mouseover
+    reptileslayer.on('mouseover', function () {
+      console.log(this)
+      this.setStyle({
+        color: "white",
+        fillColor: "green"
+      })
+    })
+    //Re-sets style to blue
+    reptileslayer.on('mouseout', function () {
+      console.log(this)
+      this.resetStyle()
+    })
+
+
+    //Turns gray on mouseover
+    musselslayer.on('mouseover', function () {
+      console.log(this)
+      this.setStyle({
+        color: "white",
+        fillColor: "yellow"
+      })
+    })
+    //Re-sets style to blue
+    musselslayer.on('mouseout', function () {
+      console.log(this)
+      this.resetStyle()
+    })
+  </script>
+
+</body>
+
+</html>
