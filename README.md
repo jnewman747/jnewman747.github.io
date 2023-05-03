@@ -1,15 +1,17 @@
 # jnewman747.github.io
 
-This portfolio was created using a Bootstrap template. The color scheme was chosen based on my favorite color blue. I ended up choosing a darker shade of blue along with gray text to try to match some of my projects which tend to have darker themes.
+My name is Jill Newman and I am a Research Analyst within the Forestry and Natural Resources Department at the University of Kentucky (UK). I am also working towards a Graduate Certificate in Digital Mapping through the Geography Department at UK and this portfolio is a collection of maps I would like to highlight.
 
-Many of these projects being presented are from the New Maps Program through the University of Kentucky. Thanks to my instructors for all of their help and feedback throughout the course of this certificate program. I also wanted to give a shoutout for all the classmates who helped me (and gave me feedback) throughout my time working on this Graduate Certificate, especially Michael Sparks for all his help during the spring semester.
+The over-arching theme of this portfolio is "natural resources." This portfolio was created using a Bootstrap template with six 'cards' to highlight six different projects. I used a blue/gray color theme because (1) many of my maps have blues and grays in them, (2) my maps tend to have darker themes to them, and (3) my favorite color is blue.
+
+Many of these projects being presented are from the New Maps Program through the University of Kentucky. I am grateful to my instructors for all of their help and feedback throughout the course of this certificate program. I also wanted to give a shoutout for all the classmates who helped me (and gave me feedback) throughout my time working on this Graduate Certificate, especially Michael Sparks for all his help.
 
 
 # Projects
 
 ## Final Project
 
-For my final project, I created a map highlighting research projects in the Steve Price Herpetology Lab in the Forestry and Natural Resources Department at the University of Kentucky. I'm currently a Research Analyst in this lab and work on several of these projects. I used data from the Price lab webpage (https://pricelab.ca.uky.edu/research-topics-and-current-projects; https://pricelab.ca.uky.edu/publications) to create a dot map of the recent research projects through Kentucky and surrounding states. This repository can be accessed here: https://github.com/jnewman747/HerpetologyLab
+For my final project, I created a map highlighting research projects in the Steve Price Herpetology Lab in the Forestry and Natural Resources Department at the University of Kentucky. As a Research Analyst in this lab, I am involved with several of these projects. I used data from the Price lab webpage (https://pricelab.ca.uky.edu/research-topics-and-current-projects; https://pricelab.ca.uky.edu/publications) to create a dot map of the recent research projects through Kentucky and surrounding states. This repository can be accessed here: https://github.com/jnewman747/HerpetologyLab
 
 This map was created using Leaflet.
 
