@@ -2,7 +2,7 @@
 
 This portfolio was created using a Bootstrap template. The color scheme was chosen based on my favorite color blue. I ended up choosing a darker shade of blue along with gray text to try to match some of my projects which tend to have darker themes.
 
-Many of these projects being presented are from the New Maps Program through the University of Kentucky. I wanted to give a shoutout for all the classmates who helped me (and gave me feedback) throughout my time working on this Graduate Certificate, especially Michael Sparks for all his help during the spring semester.
+Many of these projects being presented are from the New Maps Program through the University of Kentucky. Thanks to my instructors for all of their help and feedback throughout the course of this certificate program. I also wanted to give a shoutout for all the classmates who helped me (and gave me feedback) throughout my time working on this Graduate Certificate, especially Michael Sparks for all his help during the spring semester.
 
 
 # Projects
